@@ -14,7 +14,7 @@ require('./configs')(app);
 
 // rotas
 app.use('/auth', require('./routes/auth.routes'));
-
+app.use('/income', require('./routes/income.routes'));
 
 // gerenciamento de erros
 
