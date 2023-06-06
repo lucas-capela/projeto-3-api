@@ -26,6 +26,7 @@ router.post('/add-incomes/:incomeId', isAuthenticated, async (req, res, next) =>
     }
   });
   
+  
   router.get('/profile', async (req, res, next) => {
     const userId = req.payload._id;
     try {
