@@ -17,14 +17,6 @@ const userSchema = new Schema({
     passwordHash:{
         type: String,
         required: true
-    },
-    income:{
-        type: [Schema.Types.ObjectId],
-        ref: 'Income'
-    },
-    outcome:{
-        type: [Schema.Types.ObjectId],
-        ref: 'Outcome'
     }
 },{timestamps:true});
 
