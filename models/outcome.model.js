@@ -26,6 +26,11 @@ const outcomeSchema = new Schema({
         type: String,
         enum: ['2022','2023','2024'],
         required: true
+    },
+    user:{
+        type: [Schema.Types.ObjectId],
+        ref: 'User',
+        required:true
     }
   
 },{timestamps:true});

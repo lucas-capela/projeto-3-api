@@ -4,11 +4,11 @@ const {Schema, model} = require('mongoose');
 const incomeSchema = new Schema({
     description: {
         type: String,
-        required:[true],
+        required:true,
     },
     value: {
         type: Number,
-        required:[true]
+        required:true
     },
 
     month:{
@@ -20,6 +20,11 @@ const incomeSchema = new Schema({
     year:{
         type: String,
         enum: ['2022','2023','2024'],
+        required: true
+    },
+    user:{
+        type: [Schema.Types.ObjectId],
+        ref: 'User',
         required: true
     }
   
