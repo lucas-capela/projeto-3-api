@@ -3,7 +3,8 @@ const router = require('express').Router();
 const { isAuthenticated } = require('../middlewares/jwt.middleware'); 
 
 const User = require('../models/User.model');
-
+const Income = require('../models/income.model');
+const Outcome = require('../models/outcome.model');
 // List users
 router.get('/', async (req, res, next) => {
   try {
@@ -14,18 +15,7 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-// adicionar uma receita ao usuário
-router.post('/add-incomes/:incomeId', isAuthenticated, async (req, res, next) => {
-    const { incomeId } = req.params;
-    const userId = req.payload._id;
-    try {
-      const userFromDB = await User.findByIdAndUpdate(userId, { $push: { incomes: incomeId } }, { new: true });
-      res.status(200).json(userFromDB);
-    } catch (error) {
-      next(error);
-    }
-  });
-  
+
   
   router.get('/profile', async (req, res, next) => {
     const userId = req.payload._id;
@@ -37,6 +27,38 @@ router.post('/add-incomes/:incomeId', isAuthenticated, async (req, res, next) =>
     }
   });
 
+  router.get('/:userId/incomes', isAuthenticated, async (req, res, next) => {
+    const userId = req.params.userId; 
+    try {
+      
+      if (userId !== req.payload._id) {
+        return res.status(403).json({ error: 'Acesso negado' });
+      }
+  
+      const incomes = await Income.find({ user: userId });
+  
+      res.status(200).json({ incomes });
+    } catch (error) {
+      next(error);
+    }
+  });
 
+  router.get('/:userId/outcomes', isAuthenticated, async (req, res, next) => {
+    const userId = req.params.userId; 
+    try {
+      
+      if (userId !== req.payload._id) {
+        return res.status(403).json({ error: 'Acesso negado' });
+      }
+  
+      const outcomes = await Outcome.find({ user: userId });
+  
+      res.status(200).json({ outcomes });
+    } catch (error) {
+      next(error);
+    }
+  });
+  
+  
 
 module.exports = router;

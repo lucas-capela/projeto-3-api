@@ -13,7 +13,7 @@ require('./configs')(app);
 const { isAuthenticated } = require('./middlewares/jwt.middleware');
 
 // rotas
-app.use(isAuthenticated)
+app.use(isAuthenticated);
 app.use('/auth', require('./routes/auth.routes'));
 app.use('/income', require('./routes/income.routes'));
 app.use('/outcome', require('./routes/outcome.routes'));
