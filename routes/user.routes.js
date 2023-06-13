@@ -27,15 +27,13 @@ router.get('/', async (req, res, next) => {
     }
   });
 
-  router.get('/:userId/incomes', isAuthenticated, async (req, res, next) => {
-    const userId = req.params.userId; 
+  router.get('/incomes', isAuthenticated, async (req, res, next) => {
+    
     try {
       
-      if (userId !== req.payload._id) {
-        return res.status(403).json({ error: 'Acesso negado' });
-      }
+    
   
-      const incomes = await Income.find({ user: userId });
+      const incomes = await Income.find({ user: req.payload._id });
   
       res.status(200).json({ incomes });
     } catch (error) {
