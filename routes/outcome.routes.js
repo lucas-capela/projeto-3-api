@@ -3,17 +3,18 @@ const router = require('express').Router();
 const Outcome = require('../models/outcome.model');
 
 router.post('/', async (req,res,next)=> {
-    const {description, value, expenseType} = req.body;
+    const {description, value, expenseType,month,year,user} = req.body;
 
     try {
         if(!value){
             throw new Error ('you have to set a value');
         }
 
-        const newOutcome = await Outcome.create({description, value, expenseType});
+        const newOutcome = await Outcome.create({description, value, expenseType,month,year,user});
         res.status(201).json(newOutcome);
     } catch (error) {
         res.status(500).json({description: 'It was not possible to create this outcome'});
+        console.log(error);
     }
 })
 

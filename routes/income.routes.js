@@ -3,14 +3,14 @@ const router = require('express').Router();
 const Income = require('../models/income.model');
 
 router.post('/', async(req,res,next)=> {
-    const {description, value} = req.body;
+    const {description, value,month,year,user} = req.body;
     try {
-        if(!value){
+        if(!value || !user){
             const error = new Error ('you have to set a Value');
             error.code = 400;
             throw error;
         }
-        const newIncome = await Income.create({description, value});
+        const newIncome = await Income.create({description, value,month,year,user});
         res.status(201).json(newIncome);
     } catch (error) {
         res.status(500).json({description: 'It was not possible to create this income'});
