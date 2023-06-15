@@ -27,7 +27,7 @@ router.get('/', async (req, res, next) => {
     }
   });
 
-  router.get('/incomes', isAuthenticated, async (req, res, next) => {
+  router.get('/incomes/', isAuthenticated, async (req, res, next) => {
     
     try {
       
