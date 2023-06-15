@@ -13,11 +13,12 @@ require('./configs')(app);
 const { isAuthenticated } = require('./middlewares/jwt.middleware');
 
 // rotas
+app.use('/user', require('./routes/user.routes'));
 app.use('/auth', require('./routes/auth.routes'));
 app.use(isAuthenticated);
 app.use('/income', require('./routes/income.routes'));
 app.use('/outcome', require('./routes/outcome.routes'));
-app.use('/user', require('./routes/user.routes'));
+
 app.use('/statement', require('./routes/statement.routes'))
 
 // gerenciamento de erros
