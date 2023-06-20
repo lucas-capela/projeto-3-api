@@ -3,11 +3,13 @@
 require('dotenv/config');
 const express = require('express');
 const app = express();
+const cors = require('cors');
 
 // configuracoes 
 
 require('./database');
 require('./configs')(app);
+app.use(cors());
 
 // middlewares gerais
 const { isAuthenticated } = require('./middlewares/jwt.middleware');
