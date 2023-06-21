@@ -7,7 +7,7 @@ const cors = require('cors');
 
 // configuracoes 
 
-require('./database');
+
 require('./configs')(app);
 app.use(cors());
 

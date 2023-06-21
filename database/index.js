@@ -18,4 +18,4 @@ try {
 
 }
 
-connectDB();
+module.exports = connectDB;
