@@ -3,8 +3,8 @@ const router = require('express').Router();
 const Outcome = require('../models/outcome.model');
 
 router.post('/', async (req,res,next)=> {
-    const {description, value, expenseType,month,year,user} = req.body;
-
+    const {description, value, expenseType,month,year} = req.body;
+    const user = req.payload._id;
     try {
         if(!value){
             throw new Error ('you have to set a value');

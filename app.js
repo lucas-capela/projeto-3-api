@@ -20,7 +20,6 @@ app.use('/auth', require('./routes/auth.routes'));
 app.use(isAuthenticated);
 app.use('/income', require('./routes/income.routes'));
 app.use('/outcome', require('./routes/outcome.routes'));
-
 app.use('/statement', require('./routes/statement.routes'))
 
 // gerenciamento de erros

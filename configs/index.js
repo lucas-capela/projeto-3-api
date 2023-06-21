@@ -7,7 +7,7 @@ module.exports = (app) => {
   const CLIENT_URL = process.env.ORIGIN || 'http://localhost:3000';
 
   app.use(cors({
-    origin: [CLIENT_URL, 'http://localhost:3000'] 
+    origin: [CLIENT_URL, 'http://localhost:3001'] 
   }));
 
   app.use(logger('dev'));

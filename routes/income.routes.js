@@ -1,9 +1,12 @@
 const router = require('express').Router();
 
+const { isAuthenticated } = require('../middlewares/jwt.middleware');
 const Income = require('../models/income.model');
 
-router.post('/', async(req,res,next)=> {
-    const {description, value,month,year,user} = req.body;
+router.post('/', isAuthenticated, async(req,res,next)=> {
+    
+    const {description, value,month,year} = req.body;
+    const user = req.payload._id;
     try {
         if(!value || !user){
             const error = new Error ('you have to set a Value');
