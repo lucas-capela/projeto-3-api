@@ -19,9 +19,19 @@ router.post('/', async (req,res,next)=> {
 })
 
 router.get('/', async (req,res,next)=> {
+    const user = req.payload._id;
     try {
-        const outcomesFromDB = await Outcome.find();
+        const outcomesFromDB = await Outcome.find({user:[user]});
         res.status(200).json(outcomesFromDB);
+    } catch (error) {
+        next(error)
+    }
+})
+router.get('/:outcomeId', async (req,res,next)=> {
+    const {outcomeId} = req.params;
+    try {
+        const oneOutcome = await Outcome.findById(outcomeId);
+        res.status(200).json(oneOutcome);
     } catch (error) {
         next(error)
     }

@@ -20,14 +20,26 @@ router.post('/', isAuthenticated, async(req,res,next)=> {
     }
 })
 
-router.get('/', async (req,res,next) => {
+router.get('/', isAuthenticated, async (req,res,next) => {
+    const user = req.payload._id;
     try {
-        const incomesFromDB = await Income.find();
+        const incomesFromDB = await Income.find({user:[user]});
         res.status(200).json(incomesFromDB);
     } catch (error) {
         res.status(500).json({description: 'Error finding the incomes', error})
     }
 })
+
+router.get('/:incomeId',isAuthenticated, async (req,res,next)=> {
+    const {incomeId} = req.params;
+    try {
+        const oneIncome = await Income.findById(incomeId);
+        res.status(200).json(oneIncome);
+    } catch (error) {
+        next(error)
+    }
+})
+
 
 router.put('/:incomeId', async(req,res,next)=> {
     const {incomeId} = req.params;
