@@ -7,9 +7,9 @@ const User = require('../models/User.model');
 
 // rotas
 router.post('/signup', async (req, res, next) => {
-  const { username, email, password } = req.body;
+  const { username,name,gender, email, password } = req.body;
   try {
-    if (!username || !email || !password) {
+    if (!username || !email || !password || !gender || !name) {
       throw new Error('Campo são obrigatórios!');
     }
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -38,7 +38,7 @@ router.post('/signup', async (req, res, next) => {
 
     const hash = bcrypt.hashSync(password, 12);
 
-    await User.create({ username, email, passwordHash: hash });
+    await User.create({ username,name,gender, email, passwordHash: hash });
     res.status(201).json(`Usuário ${username} criado com sucesso!`);
   } catch (error) {
     next(error);
