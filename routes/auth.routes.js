@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const {isAuthenticated} = require('../middlewares/jwt.middleware');
 
 // modelos
 const User = require('../models/User.model');
@@ -78,6 +79,10 @@ router.post('/login', async (req, res, next) => {
     next(error);
   }
 });
+
+router.get('/verify',isAuthenticated,(req,res,next)=> {
+  res.json(req.payload);
+})
 
 router.use((err, req, res, next) => {
   res.status(400).json({ error: err.message });
